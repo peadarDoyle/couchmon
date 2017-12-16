@@ -15,11 +15,11 @@
       "Checks": [
         {
           "$type": "CouchMan.BucketRamCheckSettings, CouchMan",
-          "RamUsageThreshold": "0"
+          "RamUsageThreshold": 85
         },
         {
           "$type": "CouchMan.BucketDocumentCheckSettings, CouchMan",
-          "DocumentThreshold": "0"
+          "DocumentThreshold": 100000
         }
       ]
     }

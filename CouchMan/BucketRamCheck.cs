@@ -70,10 +70,6 @@ namespace CouchMan
                 {
                     yield return $"Bucket [{bucketConfig.Name}], RAM Usage [{percentRamUsed}%]";
                 }
-                else
-                {
-                    yield break;
-                }
             }
         }
     }

@@ -68,10 +68,6 @@ namespace CouchMan
                 {
                     yield return $"Bucket [{bucketConfig.Name}], Document Count [{documentCount}]";
                 }
-                else
-                {
-                    yield break;
-                }
             }
         }
     }
