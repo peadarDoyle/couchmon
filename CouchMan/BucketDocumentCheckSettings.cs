@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace CouchMan
 {
-    public class CouchbaseCheckSettings : ICheckSettings
+    public class BucketDocumentCheckSettings : ICheckSettings
     {
-        public int DocumentLimit { get; } = 100000;
+        public int DocumentThreshold { get; set; }
 
         public ICheck ToCheck()
         {
-            return new BucketDocumentCountCheck();
+            return new BucketDocumentCheck(this);
 
         }
     }

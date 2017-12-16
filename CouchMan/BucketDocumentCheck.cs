@@ -2,26 +2,27 @@
 using Couchbase.Configuration.Server.Serialization;
 using Couchbase.Core;
 using Nimator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CouchMan
 {
-    public class BucketDocumentCountCheck : ICheck
+    public class BucketDocumentCheck : ICheck
     {
         IClusterService _clusterService;
 
-        private readonly CouchbaseCheckSettings settings;
-        public string ShortName { get; } = "Couchbase - Document Limit Check";
+        private readonly BucketDocumentCheckSettings _settings;
+        public string ShortName { get; } = "Couchbase Ram Check";
 
-        public BucketDocumentCountCheck()
+        public BucketDocumentCheck(BucketDocumentCheckSettings settings)
         {
+            _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+
             IAuthenticator authenticator = new PasswordAuthenticator("Administrator", "badpassword");
             string[] urls = new[] { "http://localhost/8091" };
             _clusterService = new ClusterService(urls, authenticator);
-
-            settings = new CouchbaseCheckSettings();
         }
 
         public async Task<ICheckResult> RunAsync()
@@ -42,12 +43,13 @@ namespace CouchMan
             if (bucketWarnings.Any())
             {
                 int warningCount = bucketWarnings.Count();
-                string message = $"Document limit ({Settings.DocumentLimit}) breached on the following buckets: {string.Join(" | ", bucketWarnings)}";
-                return new CheckResult(ShortName, NotificationLevel.Warning, message);
+                string msg = $"Document limit ({_settings.DocumentThreshold}) breached on the following buckets: {string.Join(" | ", bucketWarnings)}";
+                return new CheckResult(ShortName, NotificationLevel.Warning, msg);
             }
             else
             {
-                return new CheckResult(ShortName, NotificationLevel.Okay);
+                string okayMsg = "Bucket document count within expected range";
+                return new CheckResult(ShortName, NotificationLevel.Okay, okayMsg);
             }
         }
 
@@ -60,11 +62,11 @@ namespace CouchMan
 
             foreach (var bucketConfig in bucketConfigs)
             {
-                long itemCount = bucketConfig.BasicStats.ItemCount;
+                long documentCount = bucketConfig.BasicStats.ItemCount;
 
-                if (itemCount > Settings.DocumentLimit)
+                if (documentCount > _settings.DocumentThreshold)
                 {
-                    yield return $"Bucket [{bucketConfig.Name}], Item Count [{itemCount}]";
+                    yield return $"Bucket [{bucketConfig.Name}], Document Count [{documentCount}]";
                 }
                 else
                 {

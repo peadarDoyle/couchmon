@@ -1,0 +1,27 @@
+﻿/* 
+  TODO complete this comment
+*/
+{
+  "Notifiers": [
+    {
+      "$type": "Nimator.Settings.ConsoleSettings, Nimator",
+      "Threshold": "Okay"
+    }
+  ],
+
+  "Layers": [
+    {
+      "Name": "Couchbase Layer",
+      "Checks": [
+        {
+          "$type": "CouchMan.BucketRamCheckSettings, CouchMan",
+          "RamUsageThreshold": "0"
+        },
+        {
+          "$type": "CouchMan.BucketDocumentCheckSettings, CouchMan",
+          "DocumentThreshold": "0"
+        }
+      ]
+    }
+  ]
+}

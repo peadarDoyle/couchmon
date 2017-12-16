@@ -61,15 +61,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BucketDocumentCheck.cs" />
+    <Compile Include="BucketDocumentCheckSettings.cs" />
+    <Compile Include="BucketRamCheck.cs" />
+    <Compile Include="BucketRamCheckSettings.cs" />
     <Compile Include="CannotAccessClusterInfoException.cs" />
     <Compile Include="ClusterService.cs" />
-    <Compile Include="BucketDocumentCountCheck.cs" />
-    <Compile Include="CouchbaseCheckSettings.cs" />
     <Compile Include="IClusterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
