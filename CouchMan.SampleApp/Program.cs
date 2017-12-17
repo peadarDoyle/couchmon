@@ -1,4 +1,5 @@
-﻿using Nimator;
+﻿using Autofac;
+using Nimator;
 using System;
 using System.IO;
 using System.Reflection;
@@ -7,7 +8,7 @@ using System.Threading;
 namespace CouchMan.SampleApp
 {
     /// <summary>
-    /// SampleApp is based on the github.com/omniaretail/nimator sample app
+    /// This SampleApp is just a copy of the https://github.com/omniaretail/nimator sample app
     /// </summary>
     public class Program
     {
@@ -29,6 +30,10 @@ namespace CouchMan.SampleApp
             log4net.Config.XmlConfigurator.Configure(); // Alternatively: http://stackoverflow.com/a/10204514/419956
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionLogger;
+
+            logger.Info($"Registering dependencies");
+
+            CouchMonContext.Initialize();
 
             logger.Info("Creating Nimator.");
 

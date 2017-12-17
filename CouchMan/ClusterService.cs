@@ -1,40 +1,24 @@
 ﻿using Couchbase;
 using Couchbase.Authentication;
-using Couchbase.Configuration.Client;
 using Couchbase.Core;
 using Couchbase.Management;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CouchMan
 {
     public class ClusterService : IClusterService
     {
-        private ClientConfiguration _clientConfig;
-        private IAuthenticator _authenticator;
+        private IClusterManager _clusterManager;
 
-        public ClusterService(string[] urls, IAuthenticator authenticator)
+        public ClusterService(ICluster cluster, IAuthenticator authenticator)
         {
-            _clientConfig = new ClientConfiguration
-            {
-                Servers = urls.Select(url => new Uri(url)).ToList()
-            };
-
-            _authenticator = authenticator;
+            cluster.Authenticate(authenticator);
+            _clusterManager = cluster.CreateManager();
         }
 
         public async Task<IClusterInfo> GetClusterInfoAsync()
         {
-            IResult<IClusterInfo> result;
-
-            using (var cluster = new Cluster(_clientConfig))
-            {
-                cluster.Authenticate(_authenticator);
-                IClusterManager manager = cluster.CreateManager();
-                result = await manager.ClusterInfoAsync().ConfigureAwait(false);
-            }
+            IResult<IClusterInfo> result = await _clusterManager.ClusterInfoAsync().ConfigureAwait(false);
 
             if (result.Success != true)
             {

@@ -1,9 +1,4 @@
 ﻿using Nimator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CouchMan
 {
@@ -13,8 +8,8 @@ namespace CouchMan
 
         public ICheck ToCheck()
         {
-            return new BucketDocumentCheck(this);
-
+            var clusterService = CouchMonContext.GetInstance<IClusterService>();
+            return new BucketDocumentCheck(clusterService, DocumentThreshold);
         }
     }
 }

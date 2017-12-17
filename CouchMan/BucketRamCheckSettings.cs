@@ -8,7 +8,8 @@ namespace CouchMan
 
         public ICheck ToCheck()
         {
-            return new BucketRamCheck(this);
+            var clusterService = CouchMonContext.GetInstance<IClusterService>();
+            return new BucketRamCheck(clusterService, RamUsageThreshold);
         }
     }
 }

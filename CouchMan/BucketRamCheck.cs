@@ -1,8 +1,6 @@
-﻿using Couchbase.Authentication;
-using Couchbase.Configuration.Server.Serialization;
+﻿using Couchbase.Configuration.Server.Serialization;
 using Couchbase.Core;
 using Nimator;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,18 +9,15 @@ namespace CouchMan
 {
     public class BucketRamCheck : ICheck
     {
-        IClusterService _clusterService;
-
-        private readonly BucketRamCheckSettings _settings;
         public string ShortName { get; } = "Couchbase Document Check";
 
-        public BucketRamCheck(BucketRamCheckSettings settings)
-        {
-            _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+        private readonly IClusterService _clusterService;
+        private readonly int _ramUsageThreshold;
 
-            IAuthenticator authenticator = new PasswordAuthenticator("Administrator", "badpassword");
-            string[] urls = new[] { "http://localhost/8091" };
-            _clusterService = new ClusterService(urls, authenticator);
+        public BucketRamCheck(IClusterService clusterService, int threshold)
+        {
+            _clusterService = clusterService;
+            _ramUsageThreshold = threshold;
         }
 
         public async Task<ICheckResult> RunAsync()
@@ -43,7 +38,7 @@ namespace CouchMan
             if (bucketWarnings.Any())
             {
                 int warningCount = bucketWarnings.Count();
-                string message = $"RAM useage threshold ({_settings.RamUsageThreshold}) breached on the following buckets: {string.Join(" | ", bucketWarnings)}";
+                string message = $"RAM useage threshold ({_ramUsageThreshold}) breached on the following buckets: {string.Join(" | ", bucketWarnings)}";
                 return new CheckResult(ShortName, NotificationLevel.Warning, message);
             }
             else
@@ -53,7 +48,7 @@ namespace CouchMan
             }
         }
 
-        public IEnumerable<string> GetBucketsToWarnOn(IList<IBucketConfig> bucketConfigs)
+        private IEnumerable<string> GetBucketsToWarnOn(IList<IBucketConfig> bucketConfigs)
         {
             if (!bucketConfigs.Any())
             {
@@ -66,7 +61,7 @@ namespace CouchMan
                 ulong ramQuota = bucketConfig.Quota.Ram;
                 double percentRamUsed = (memUsed / (double)ramQuota) * 100;
 
-                if (percentRamUsed > _settings.RamUsageThreshold)
+                if (percentRamUsed > _ramUsageThreshold)
                 {
                     yield return $"Bucket [{bucketConfig.Name}], RAM Usage [{percentRamUsed}%]";
                 }
