@@ -39,7 +39,7 @@ namespace Couchmon.Tests
         }
 
         [Test]
-        public async Task GetClusterInfo_TryGegClusterInfo_SuccefullyGetClusterInfo()
+        public async Task GetClusterInfo_TryGetClusterInfo_SuccefullyGetClusterInfo()
         {
             _clusterManager.Setup(x => x.ClusterInfoAsync()).ReturnsAsync(_clusterInfoResult.Object);
             _clusterInfoResult.SetupGet(x => x.Success).Returns(true);
@@ -52,7 +52,7 @@ namespace Couchmon.Tests
         }
 
         [Test]
-        public void GetClusterInfo_TryGegClusterInfo_ThrowsCannotAccessClusterInfoException()
+        public void GetClusterInfo_TryGetClusterInfo_ThrowsCannotAccessClusterInfoException()
         {
             string message = "an exception message";
 
