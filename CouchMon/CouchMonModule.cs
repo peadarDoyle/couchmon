@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace Couchmon
 {
+    /// <summary>
+    /// CouchMon dependencies are registed in this module
+    /// </summary>
     public class CouchMonModule : Module
     {
         protected override void Load(ContainerBuilder builder)

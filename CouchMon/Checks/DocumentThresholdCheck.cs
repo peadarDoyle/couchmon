@@ -6,13 +6,16 @@ using System.Linq;
 
 namespace Couchmon.Checks
 {
+    /// <summary>
+    /// Check that Couchbase bucket Document count does not go over a healthy threshold.
+    /// </summary>
     public class DocumentThresholdCheck : BucketCheck
     {
         private readonly int _threshold;
 
         public DocumentThresholdCheck(IClusterService clusterService, int threshold) : base (clusterService)
         {
-            ShortName = "Couchbase Bucket RAM Check";
+            ShortName = "Couchbase Bucket Document Check";
             _threshold = threshold;
         }
 

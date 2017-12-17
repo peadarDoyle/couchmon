@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Couchmon.Couchbase
 {
+    /// <summary>
+    /// Access the Coucbase Cluster api via this service class
+    /// </summary>
     public class ClusterService : IClusterService
     {
         private IClusterManager _clusterManager;

@@ -3,6 +3,9 @@ using Couchmon.Couchbase;
 
 namespace Couchmon
 {
+    /// <summary>
+    /// This context is used to manage dependencies
+    /// </summary>
     public static class CouchmonContext
     {
         private static IContainer _container;

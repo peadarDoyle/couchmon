@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Couchmon.Checks
 {
+    /// <summary>
+    /// Check that Couchbase bucket RAM usage does not go over a healthy threshold.
+    /// </summary>
     public class RamThresholdCheck : BucketCheck, ICheck
     {
         private readonly int _threshold;
