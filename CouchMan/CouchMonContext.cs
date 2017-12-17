@@ -2,7 +2,7 @@
 
 namespace CouchMan
 {
-    public static class CouchMonContext
+    public static class CouchbaseContext
     {
         private static IContainer _container;
 
@@ -13,7 +13,7 @@ namespace CouchMan
             _container = builder.Build();
         }
 
-        public static T GetInstance<T>()
+        public static T GetInstance<T>() where T : IClusterService
         {
             using (var scope = _container.BeginLifetimeScope())
             {

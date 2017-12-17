@@ -4,6 +4,7 @@ using Couchbase.Authentication;
 using Couchbase.Configuration.Client;
 using Couchbase.Core;
 using System;
+using System.Configuration;
 using System.Linq;
 
 namespace CouchMan
@@ -14,13 +15,13 @@ namespace CouchMan
         {
             builder.RegisterType<Cluster>()
                    .As<ICluster>()
-                   .WithParameter(new TypedParameter(typeof(ClientConfiguration), GetClientConfig()))
+                   .WithParameter(new TypedParameter(typeof(ClientConfiguration), GetCouchbaseClientConfig()))
                    .SingleInstance();
 
             builder.RegisterType<PasswordAuthenticator>()
                    .As<IAuthenticator>()
-                   .WithParameter("username",GetClusterUsername())
-                   .WithParameter("password", GetClusterPassword())
+                   .WithParameter("username",GetCouchbaseUsername())
+                   .WithParameter("password", GetCouchbasePassword())
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<ClusterService>()
@@ -28,24 +29,30 @@ namespace CouchMan
                    .InstancePerLifetimeScope();
         }
 
-        private ClientConfiguration GetClientConfig()
+        private ClientConfiguration GetCouchbaseClientConfig()
         {
-            var urls = new[] { "http://localhost/8091" };
+            string ipCsv = ConfigurationManager.AppSettings["couchbase.ip.csv"];
+            string transport = ConfigurationManager.AppSettings["couchbase.transport"];
+
+            string[] ips = ipCsv.Split(';')
+                                .Distinct()
+                                .Select(ip => $"{transport}://{ip}")
+                                .ToArray();
 
             return new ClientConfiguration
             {
-                Servers = urls.Select(url => new Uri(url)).ToList()
+                Servers = ips.Select(ip => new Uri(ip)).ToList()
             };
         }
 
-        private string GetClusterUsername()
+        private string GetCouchbaseUsername()
         {
-            return "Administrator";
+            return ConfigurationManager.AppSettings["couchbase.username"];
         }
 
-        private string GetClusterPassword()
+        private string GetCouchbasePassword()
         {
-            return "badpassword";
+            return ConfigurationManager.AppSettings["couchbase.password"];
         }
     }
 }

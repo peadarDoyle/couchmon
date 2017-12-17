@@ -1,5 +1,4 @@
-﻿using Autofac;
-using Nimator;
+﻿using Nimator;
 using System;
 using System.IO;
 using System.Reflection;
@@ -31,9 +30,11 @@ namespace CouchMan.SampleApp
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionLogger;
 
-            logger.Info($"Registering dependencies");
+            logger.Info($"Initializing the Coucbase Context".);
 
-            CouchMonContext.Initialize();
+            CouchbaseContext.Initialize();
+
+            logger.Info($"Coucbase Context initialization complete.");
 
             logger.Info("Creating Nimator.");
 

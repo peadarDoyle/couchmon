@@ -8,7 +8,7 @@ namespace CouchMan
 
         public ICheck ToCheck()
         {
-            var clusterService = CouchMonContext.GetInstance<IClusterService>();
+            var clusterService = CouchbaseContext.GetInstance<IClusterService>();
             return new BucketDocumentCheck(clusterService, DocumentThreshold);
         }
     }
