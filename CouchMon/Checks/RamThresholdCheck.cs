@@ -15,7 +15,7 @@ namespace Couchmon.Checks
 
         public RamThresholdCheck(IClusterService clusterService, int threshold) : base (clusterService)
         {
-            ShortName = "Couchbase Bucket Document Check";
+            ShortName = "Couchbase Bucket RAM Check";
             _threshold = threshold;
         }
 
