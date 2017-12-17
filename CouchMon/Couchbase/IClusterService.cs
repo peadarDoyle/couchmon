@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Couchbase.Core;
 
-namespace CouchMan
+namespace Couchmon.Couchbase
 {
     public interface IClusterService
     {

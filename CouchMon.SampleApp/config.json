@@ -1,5 +1,6 @@
 ﻿/* 
-  TODO complete this comment
+  Notifiers: Only the Console notifier is to be used.
+  Layers: Contains the Coucbase checks: Document Count and Ram Usage.
 */
 {
   "Notifiers": [

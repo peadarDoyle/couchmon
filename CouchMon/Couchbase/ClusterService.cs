@@ -4,7 +4,7 @@ using Couchbase.Core;
 using Couchbase.Management;
 using System.Threading.Tasks;
 
-namespace CouchMan
+namespace Couchmon.Couchbase
 {
     public class ClusterService : IClusterService
     {
@@ -22,7 +22,7 @@ namespace CouchMan
 
             if (result.Success != true)
             {
-                throw new CannotAccessClusterInfoException(result.Message, result.Exception);
+                throw new CouchMonNotInitializedException(result.Message, result.Exception);
             }
 
             return result.Value;

@@ -3,11 +3,12 @@ using Couchbase;
 using Couchbase.Authentication;
 using Couchbase.Configuration.Client;
 using Couchbase.Core;
+using Couchmon.Couchbase;
 using System;
 using System.Configuration;
 using System.Linq;
 
-namespace CouchMan
+namespace Couchmon
 {
     public class CouchMonModule : Module
     {

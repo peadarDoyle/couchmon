@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 
-namespace CouchMan.SampleApp
+namespace Couchmon.SampleApp
 {
     /// <summary>
     /// This SampleApp is just a copy of the https://github.com/omniaretail/nimator sample app
@@ -30,11 +30,12 @@ namespace CouchMan.SampleApp
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionLogger;
 
-            logger.Info($"Initializing the Coucbase Context".);
+            logger.Info($"Initializing the CouchMon Context.");
 
-            CouchbaseContext.Initialize();
+            // must be done before creating Nimator
+            CouchmonContext.Initialize();
 
-            logger.Info($"Coucbase Context initialization complete.");
+            logger.Info($"CouchMon Context initialization complete.");
 
             logger.Info("Creating Nimator.");
 

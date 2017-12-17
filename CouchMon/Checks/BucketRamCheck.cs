@@ -1,11 +1,12 @@
 ﻿using Couchbase.Configuration.Server.Serialization;
 using Couchbase.Core;
+using Couchmon.Couchbase;
 using Nimator;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CouchMan
+namespace Couchmon.Checks
 {
     public class BucketRamCheck : ICheck
     {
@@ -28,7 +29,7 @@ namespace CouchMan
             {
                 clusterInfo = await _clusterService.GetClusterInfoAsync();
             }
-            catch (CannotAccessClusterInfoException ex)
+            catch (CouchMonNotInitializedException ex)
             {
                 return new CheckResult(ShortName, NotificationLevel.Critical, ex.Message);
             }

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CouchMan", "CouchMan.csproj", "{02CC977B-058D-4984-8262-F76460D52A60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CouchMon", "CouchMon.csproj", "{02CC977B-058D-4984-8262-F76460D52A60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CouchMan.SampleApp", "..\CouchMan.SampleApp\CouchMan.SampleApp.csproj", "{FD0A54F6-B356-438D-970E-76EB546C34F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CouchMon.SampleApp", "..\CouchMon.SampleApp\CouchMon.SampleApp.csproj", "{FD0A54F6-B356-438D-970E-76EB546C34F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CouchMan.Tests", "..\CouchMan.Tests\CouchMan.Tests.csproj", "{C2256E6A-0A83-40D3-A4C3-B0779B700751}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CouchMon.Tests", "..\CouchMon.Tests\CouchMon.Tests.csproj", "{C2256E6A-0A83-40D3-A4C3-B0779B700751}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

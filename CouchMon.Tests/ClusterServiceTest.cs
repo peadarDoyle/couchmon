@@ -2,12 +2,13 @@
 using Couchbase.Authentication;
 using Couchbase.Core;
 using Couchbase.Management;
+using Couchmon.Couchbase;
 using Moq;
 using Moq.AutoMock;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
-namespace CouchMan.Tests
+namespace Couchmon.Tests
 {
     [TestFixture]
     public class ClusterServiceTest
@@ -59,7 +60,7 @@ namespace CouchMan.Tests
             _clusterInfoResult.SetupGet(x => x.Success).Returns(false);
             _clusterInfoResult.SetupGet(x => x.Message).Returns(message);
 
-            var exception = Assert.ThrowsAsync<CannotAccessClusterInfoException>(async () => await _target.GetClusterInfoAsync());
+            var exception = Assert.ThrowsAsync<CouchMonNotInitializedException>(async () => await _target.GetClusterInfoAsync());
 
             Assert.AreEqual(exception.Message, message);
             _clusterManager.Verify(x => x.ClusterInfoAsync(), Times.Once);

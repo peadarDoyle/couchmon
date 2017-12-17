@@ -1,8 +1,9 @@
 ﻿using Autofac;
+using Couchmon.Couchbase;
 
-namespace CouchMan
+namespace Couchmon
 {
-    public static class CouchbaseContext
+    public static class CouchmonContext
     {
         private static IContainer _container;
 
@@ -15,6 +16,11 @@ namespace CouchMan
 
         public static T GetInstance<T>() where T : IClusterService
         {
+            if (_container == null)
+            {
+                throw new NotInitializedException();
+            }
+
             using (var scope = _container.BeginLifetimeScope())
             {
                 return scope.Resolve<T>();

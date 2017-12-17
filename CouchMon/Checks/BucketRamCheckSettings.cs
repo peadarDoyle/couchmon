@@ -1,6 +1,7 @@
-﻿using Nimator;
+﻿using Couchmon.Couchbase;
+using Nimator;
 
-namespace CouchMan
+namespace Couchmon.Checks
 {
     public class BucketRamCheckSettings : ICheckSettings
     {
@@ -8,7 +9,7 @@ namespace CouchMan
 
         public ICheck ToCheck()
         {
-            var clusterService = CouchbaseContext.GetInstance<IClusterService>();
+            var clusterService = CouchmonContext.GetInstance<IClusterService>();
             return new BucketRamCheck(clusterService, RamUsageThreshold);
         }
     }
