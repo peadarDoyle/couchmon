@@ -15,11 +15,11 @@
       "Name": "Couchbase Layer",
       "Checks": [
         {
-          "$type": "CouchMan.BucketRamCheckSettings, CouchMan",
+          "$type": "Couchmon.Checks.RamThresholdCheckSettings, Couchmon",
           "RamUsageThreshold": 1
         },
         {
-          "$type": "CouchMan.BucketDocumentCheckSettings, CouchMan",
+          "$type": "Couchmon.Checks.DocumentThresholdCheckSettings, Couchmon",
           "DocumentThreshold": 1
         }
       ]

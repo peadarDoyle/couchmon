@@ -67,10 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Checks\BucketDocumentCheck.cs" />
-    <Compile Include="Checks\BucketDocumentCheckSettings.cs" />
-    <Compile Include="Checks\BucketRamCheck.cs" />
-    <Compile Include="Checks\BucketRamCheckSettings.cs" />
+    <Compile Include="Checks\BucketCheck.cs" />
+    <Compile Include="Checks\DocumentThresholdCheck.cs" />
+    <Compile Include="Checks\DocumentThresholdCheckSettings.cs" />
+    <Compile Include="Checks\RamThresholdCheck.cs" />
+    <Compile Include="Checks\RamThresholdCheckSettings.cs" />
     <Compile Include="Couchbase\CannotAccessClusterInfoException.cs" />
     <Compile Include="Couchbase\ClusterService.cs" />
     <Compile Include="CouchMonContext.cs" />

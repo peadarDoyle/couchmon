@@ -22,7 +22,7 @@ namespace Couchmon.Couchbase
 
             if (result.Success != true)
             {
-                throw new CouchMonNotInitializedException(result.Message, result.Exception);
+                throw new CannotAccesClusterInfoException(result.Message, result.Exception);
             }
 
             return result.Value;

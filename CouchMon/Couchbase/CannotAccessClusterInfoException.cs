@@ -2,8 +2,8 @@
 
 namespace Couchmon.Couchbase
 {
-    public class CouchMonNotInitializedException : Exception
+    public class CannotAccesClusterInfoException : Exception
     {
-        public CouchMonNotInitializedException(string message, Exception innerException) : base (message, innerException) { }
+        public CannotAccesClusterInfoException(string message, Exception innerException) : base (message, innerException) { }
     }
 }

@@ -60,7 +60,7 @@ namespace Couchmon.Tests
             _clusterInfoResult.SetupGet(x => x.Success).Returns(false);
             _clusterInfoResult.SetupGet(x => x.Message).Returns(message);
 
-            var exception = Assert.ThrowsAsync<CouchMonNotInitializedException>(async () => await _target.GetClusterInfoAsync());
+            var exception = Assert.ThrowsAsync<CannotAccesClusterInfoException>(async () => await _target.GetClusterInfoAsync());
 
             Assert.AreEqual(exception.Message, message);
             _clusterManager.Verify(x => x.ClusterInfoAsync(), Times.Once);
