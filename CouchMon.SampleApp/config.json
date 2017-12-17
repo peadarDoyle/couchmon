@@ -16,11 +16,11 @@
       "Checks": [
         {
           "$type": "Couchmon.Checks.RamThresholdCheckSettings, Couchmon",
-          "RamUsageThreshold": 1
+          "RamUsageThreshold": 85
         },
         {
           "$type": "Couchmon.Checks.DocumentThresholdCheckSettings, Couchmon",
-          "DocumentThreshold": 1
+          "DocumentThreshold": 100000
         }
       ]
     }
